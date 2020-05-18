@@ -1,0 +1,54 @@
+.semp-select-wrapper {
+    position: relative;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    width: 200px;
+    border: 1px solid #B2B4D1;
+    box-sizing: border-box;
+}
+
+.semp-select-label {
+    height: 100%;
+    margin-right: 20px;
+    padding: 0 5px;
+    font-size: 14px;
+    color: #7F8298;
+    cursor: default;
+}
+
+.semp-select-icon {
+    position: absolute;
+    top: 0;
+    width: 20px;
+    right: 0;
+    bottom: 0;
+    background: url("down.png") center no-repeat;
+    transition: all .5s;
+}
+
+.active .semp-select-icon {
+    transform: rotate(180deg);
+}
+
+.semp-select-dorpdown {
+    display: none;
+    position: absolute;
+    width: 200px;
+    border: 1px solid #B2B4D1;
+    box-sizing: border-box;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.semp-select-item {
+    padding: 5px;
+    font-size: 14px;
+    color: #7F8298;
+    cursor: default;
+    user-select: none;
+}
+
+.semp-select-item:hover {
+    background: #eee;
+}

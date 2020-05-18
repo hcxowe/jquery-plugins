@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./jquery.sempSelect.css">
+
+    <script src="./jquery.min.js"></script>
+    <script src="./jquery.sempSelect.js"></script>
+</head>
+<body>
+    <span style="display: inline-block; width: 300px;"></span>
+    <div id="sel"></div>
+
+    <script>
+        $(function() {
+            $('#sel').sempSelect({
+                width: 180,
+                options: [
+                    { value: 1, label: '第一层级' },
+                    { value: 2, label: '第二层级' },
+                    { value: 3, label: '第三层级' },
+                    { value: 4, label: '第四层级' }
+                ]
+            })
+        })
+    </script>
+</body>
+</html>
