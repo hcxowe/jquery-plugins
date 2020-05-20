@@ -6,6 +6,7 @@
     width: 200px;
     border: 1px solid #B2B4D1;
     box-sizing: border-box;
+    vertical-align: middle;
 }
 
 .semp-select-label {
@@ -39,6 +40,8 @@
     box-sizing: border-box;
     max-height: 200px;
     overflow: auto;
+    z-index: 9;
+    background: #fff;
 }
 
 .semp-select-item {
