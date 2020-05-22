@@ -12,17 +12,15 @@
     // 默认配置
     SempSelect.DEFAULTS = {
         width: 250,
-        data: [
-            { value: 1, label: 'XX项目1' },
-            { value: 2, label: 'XX项目2' },
-            { value: 3, label: 'XX项目3' },
-            { value: 4, label: 'XX项目4' }
-        ]
+        data: [],
+        valueField: 'value',
+        labelField: 'label',
+        onSelect: function() {}
     }
 
     // 事件
     SempSelect.EVENTS = {
-
+        'on-select': 'onSelect'
     }
 
     // 方法
@@ -60,6 +58,12 @@
         var that = this
         this.$container.click(function(evt) {
             evt.stopPropagation()
+
+            if (that.$container.hasClass('active')) {
+                that.$dropDownContainer.fadeOut()
+                that.$container.removeClass('active')
+                return
+            }
             
             var offset = that.$container.offset()
             var height = that.$container.height()
@@ -81,6 +85,8 @@
         this.$dropDownContainer.on('click', '.semp-select-item', function() {
             that.$resultShow.text($(this).text())
             that.selValue = $(this).data('value')
+
+            that.trigger('on-select', that.selValue)
         })
     }
 
@@ -91,21 +97,21 @@
         var listHtml = ''
         for (var i = 0; i < this.options.data.length; i++) {
             var item = this.options.data[i]
-            listHtml += '<div class="semp-select-item" data-value=' + item.value + '>' + item.label + '</div>'
+            listHtml += '<div class="semp-select-item" data-value=' + item[this.options.valueField] + '>' + item[this.options.labelField] + '</div>'
         }
 
         this.$dropDownContainer.empty().append(listHtml)
     }
 
     SempSelect.prototype.value = function(value) {
-        if (!value) {
+        if (typeof value == 'undefined') {
             return this.selValue
         }
 
-        for (var i = 0; i < this.options.data; i++) {
-            if (this.options.data[i].value == value) {
+        for (var i = 0; i < this.options.data.length; i++) {
+            if (this.options.data[i][this.options.valueField] == value) {
                 this.selValue = value
-                this.$resultShow.text(this.options.data[i].label)
+                this.$resultShow.text(this.options.data[i][this.options.labelField])
                 break
             }
         }
@@ -118,6 +124,10 @@
 
         this.options.data = data
         this.initData()
+    }
+
+    SempSelect.prototype.trigger = function(eventName, value) {
+        this.options[SempSelect.EVENTS[eventName]](value)
     }
 
     $.fn.sempSelect = function(option) {
